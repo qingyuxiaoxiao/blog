@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//后台登录录音
+Route::get('admin/login','Admin\LoginController@login');
+//验证码路由
+Route::get('admin/code','Admin\LoginController@code');
