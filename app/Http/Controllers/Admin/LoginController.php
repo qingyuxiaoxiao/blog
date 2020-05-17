@@ -69,6 +69,28 @@ class LoginController extends Controller
     }
 
 
+
+    //后台首页
+    public function index()
+    {
+        return view('admin.index');
+    }
+
+    //后台欢迎页
+    public function welcome()
+    {
+        return view('admin.welcome');
+    }
+
+    //退出登录
+    public function logout()
+    {
+        // 清空session中的用户信息
+        session()->flush();
+        // 跳转到登录页面
+        return redirect('admin/login');
+    }
+
     public function jiami()
     {
         $str = '123456';
