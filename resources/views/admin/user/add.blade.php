@@ -6,6 +6,7 @@
     <title>欢迎页面-X-admin2.0</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   @include('admin.public.styles')
@@ -34,7 +35,7 @@
           </div>
           <div class="layui-form-item">
               <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>昵称
+                  <span class="x-red">*</span>用户名
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
@@ -97,20 +98,20 @@
               //发异步，把数据提交给php
               $.ajax({
                  type:'POST',
-                 url:'admin/user',
+                 url:'/admin/user',
                  dataType:'json',
-                 headers:{
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 },
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
                   data:data.field,
                   success:function (data) {
                      //弹出层提示添加成功，并且刷新父级
                       if(data.status == 0){
-                          layui.alert(data.message,{icon: 6},function () {
+                          layer.alert(data.message,{icon: 6},function() {
                               parent.location.reload(true);
                           });
                       }else{
-                          layui.alert(data.message,{icon:5});
+                          layer.alert(data.message,{icon:5});
                       }
                   },
                   error:function () {

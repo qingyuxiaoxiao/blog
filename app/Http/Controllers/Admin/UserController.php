@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -12,10 +14,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = User::orderBy('user_id','asc')
+            ->where(function ($quest) use($request){
+                $username = $request->input('username');
+                $email    = $request->input('email');
+                if (!empty($username)){
+                    $query->where('user_name','like','%'.$username.'%');
+                }
+                if(!empty($email)){
+                    $query->where('email','like','%'.$email.'%');
+                }
+            })
+            ->paginate($request->input('num')?$request->input('num'):3);
 
-        return view('admin.user.list');
+        return view('admin.user.list',compact('user','request'));
     }
 
     /**
@@ -37,7 +51,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        return 1111;
+        //接收前台表单提交数据
+        $input = $request->all();
+
+        //添加数据到数据库
+        $username = $input['username'];
+        $pass = Crypt::encrypt($input['pass']);
+        $res  = User::create(['user_name'=>$username,'user_pass'=>$pass,'email'=>$input['email']]);
+        //判断是否添加成功
+        if ($res){
+            $data = [
+                'status'  => 0,
+                'message' => '添加用户成功'
+            ];
+        }else{
+            $data = [
+                'status'  => 1,
+                'message' => '添加用户失败'
+            ];
+        }
+        return $data;
     }
 
     /**
