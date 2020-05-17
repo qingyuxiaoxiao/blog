@@ -9,12 +9,19 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="member-list.html">
+                        <a _href="{{ url('admin/user') }}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表</cite>
 
                         </a>
                     </li >
+                    <li>
+                        <a _href="{{ url('admin/user/create') }}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>会员添加</cite>
+
+                        </a>
+                    </li>
                     <li>
                         <a _href="member-del.html">
                             <i class="iconfont">&#xe6a7;</i>
@@ -30,14 +37,14 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="xxx.html">
+                                <a _href="">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>会员列表</cite>
 
                                 </a>
                             </li >
                             <li>
-                                <a _href="xx.html">
+                                <a _href="{{ url('admin/user/create') }}">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>会员删除</cite>
 
