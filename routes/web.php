@@ -25,7 +25,8 @@ Route::get('admin/jiami','Admin\LoginController@jiami');
 Route::get('admin/index','Admin\LoginController@index');
 //后台欢迎页面
 Route::get('admin/welcome','Admin\LoginController@welcome');
-
+//后台退出路由
+Route::get('admin/logout','Admin\LoginController@logout');
 /*Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 //后台登录路由
     Route::get('login','LoginController@login');
