@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本地8.0
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
  Source Server Version : 100410
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100410
  File Encoding         : 65001
 
- Date: 18/05/2020 15:38:36
+ Date: 18/05/2020 22:58:53
 */
 
 SET NAMES utf8mb4;
@@ -179,6 +179,15 @@ CREATE TABLE `blog_permission`  (
 ) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of blog_permission
+-- ----------------------------
+INSERT INTO `blog_permission` VALUES (1, '后台首页权限', 'App\\Http\\Controllers\\Admin\\LoginController@index');
+INSERT INTO `blog_permission` VALUES (2, '用户添加权限', 'App\\Http\\Controllers\\Admin\\UserController@create');
+INSERT INTO `blog_permission` VALUES (3, '用户修改权限', 'App\\Http\\Controllers\\Admin\\UserController@edit');
+INSERT INTO `blog_permission` VALUES (4, '后台欢迎页面', 'App\\Http\\Controllers\\Admin\\LoginController@welcome');
+INSERT INTO `blog_permission` VALUES (5, '文章添加权限', 'App\\Http\\Controllers\\Admin\\ArticleController@create');
+
+-- ----------------------------
 -- Table structure for blog_role
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_role`;
@@ -189,7 +198,7 @@ CREATE TABLE `blog_role`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_role
@@ -206,6 +215,25 @@ CREATE TABLE `blog_role_permission`  (
 ) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
+-- Records of blog_role_permission
+-- ----------------------------
+INSERT INTO `blog_role_permission` VALUES (2, 5);
+INSERT INTO `blog_role_permission` VALUES (2, 4);
+INSERT INTO `blog_role_permission` VALUES (1, 5);
+INSERT INTO `blog_role_permission` VALUES (1, 4);
+INSERT INTO `blog_role_permission` VALUES (2, 3);
+INSERT INTO `blog_role_permission` VALUES (1, 3);
+INSERT INTO `blog_role_permission` VALUES (2, 2);
+INSERT INTO `blog_role_permission` VALUES (1, 2);
+INSERT INTO `blog_role_permission` VALUES (1, 1);
+INSERT INTO `blog_role_permission` VALUES (2, 1);
+INSERT INTO `blog_role_permission` VALUES (1, 6);
+INSERT INTO `blog_role_permission` VALUES (8, 6);
+INSERT INTO `blog_role_permission` VALUES (8, 5);
+INSERT INTO `blog_role_permission` VALUES (8, 2);
+INSERT INTO `blog_role_permission` VALUES (8, 1);
+
+-- ----------------------------
 -- Table structure for blog_user
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_user`;
@@ -220,7 +248,7 @@ CREATE TABLE `blog_user`  (
   `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '验证账号有效性',
   `expire` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账号激活是否过期时间',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_user
@@ -235,5 +263,11 @@ CREATE TABLE `blog_user_role`  (
   `user_id` int(11) NOT NULL COMMENT '用户表在关联表中的外键',
   `role_id` int(11) NOT NULL COMMENT '角色表在关联表的外键'
 ) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Records of blog_user_role
+-- ----------------------------
+INSERT INTO `blog_user_role` VALUES (26, 1);
+INSERT INTO `blog_user_role` VALUES (26, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;
