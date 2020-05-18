@@ -6,6 +6,7 @@ use App\Model\Permission;
 use App\Model\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -19,6 +20,23 @@ class RoleController extends Controller
             $own_pers[] = $v->id;
         }
         return view('admin.role.auth',compact('role','perms','own_pers'));
+    }
+
+    //处理授权
+    public function doAuth(Request $request)
+    {
+
+        $input = $request->except('_token');
+        DB::table('role_permission')->where('role_id',$input['role_id'])->delete();
+        //添加新授予的权限
+        if(!empty($input['permission_id'])){
+            foreach ($input['permission_id'] as $v){
+                \DB::table('role_permission')->insert(['role_id'=>$input['role_id'],'permission_id'=>$v]);
+            }
+        }
+
+
+        return redirect('admin/role');
     }
     /**
      * Display a listing of the resource.

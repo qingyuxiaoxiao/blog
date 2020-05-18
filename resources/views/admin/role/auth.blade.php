@@ -21,7 +21,7 @@
 
 <body>
 <div class="x-body layui-anim layui-anim-up">
-    <form class="layui-form" action="{{ url('admin/role') }}" method="post">
+    <form class="layui-form" action="{{ url('admin/role/doauth') }}" method="post">
         {{ csrf_field() }}
         <div class="layui-form-item">
             <label for="role_name" class="layui-form-label">
@@ -59,7 +59,7 @@
             <label for="L_repass" class="layui-form-label">
             </label>
             <button class="layui-btn" lay-filter="add" lay-submit="">
-                增加
+                授权
             </button>
         </div>
     </form>

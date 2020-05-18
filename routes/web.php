@@ -36,5 +36,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin']],
     //角色模块路由
     //角色授权路由
     Route::get('role/auth/{id}','RoleController@auth');
+    Route::post('role/doauth','RoleController@doAuth');
     Route::resource('role','RoleController');
 });
