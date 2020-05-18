@@ -32,4 +32,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin']],
     //后台用户相关路由
     Route::get('user/del','UserController@delAll');
     Route::resource('user','UserController');
+
+    //角色模块路由
+    //角色授权路由
+    Route::get('role/auth/{id}','RoleController@auth');
+    Route::resource('role','RoleController');
 });

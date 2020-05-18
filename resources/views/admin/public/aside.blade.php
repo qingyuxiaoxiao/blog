@@ -22,43 +22,29 @@
 
                         </a>
                     </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>角色管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
                     <li>
-                        <a _href="member-del.html">
+                        <a _href="{{ url('admin/role') }}">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员删除</cite>
+                            <cite>角色列表</cite>
 
                         </a>
-                    </li>
+                    </li >
                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe70b;</i>
-                            <cite>会员管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
+                        <a _href="{{ url('admin/role/create') }}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色添加</cite>
+
                         </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员列表</cite>
-
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="{{ url('admin/user/create') }}">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员删除</cite>
-
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="xx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>等级管理</cite>
-
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
                 </ul>
             </li>
