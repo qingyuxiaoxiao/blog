@@ -30,5 +30,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin']],
     //后台退出登录路由
     Route::get('logout','LoginController@logout');
     //后台用户相关路由
+    Route::get('user/del','UserController@delAll');
     Route::resource('user','UserController');
 });

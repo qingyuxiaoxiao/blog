@@ -92,7 +92,7 @@
                     <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
                         <i class="layui-icon">&#xe631;</i>
                     </a>
-                    <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                    <a title="删除" onclick="member_del(this,'{{ $v->user_id }}')" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>
                     </a>
                 </td>
@@ -146,33 +146,48 @@
     }
 
     /*用户-删除*/
-    function member_del(obj, id) {
-        layer.confirm('确认要删除吗？', function (index) {
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {icon: 1, time: 1000});
+    function member_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+
+            $.post('/admin/user/'+id,{"_method":"delete","_token":"{{csrf_token()}}"},function(data){
+                // console.log(data);
+                if(data.status == 0){
+                    $(obj).parents("tr").remove();
+                    layer.msg(data.message,{icon:6,time:1000});
+                }else{
+                    layer.msg(data.message,{icon:5,time:1000});
+                }
+            })
         });
     }
 
 
-    function delAll(argument) {
+    function delAll (argument) {
+        // 获取到要批量删除的用户的id
+        var ids = [];
 
-        var data = tableCheck.getData();
+        $(".layui-form-checked").not('.header').each(function(i,v){
+            var u = $(v).attr('data-id');
+            ids.push(u);
+        })
 
-        layer.confirm('确认要删除吗？' + data, function (index) {
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+
+        layer.confirm('确认要删除吗？',function(index){
+
+            $.get('/admin/user/del',{'ids':ids},function(data){
+                if(data.status == 0){
+                    $(".layui-form-checked").not('.header').parents('tr').remove();
+                    layer.msg(data.message,{icon:6,time:1000});
+                }else{
+                    layer.msg(data.message,{icon:5,time:1000});
+                }
+            });
+
+
         });
     }
 </script>
-<script>var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();</script>
+
 </body>
 
 </html>
