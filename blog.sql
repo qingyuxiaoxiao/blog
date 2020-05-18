@@ -11,7 +11,7 @@
  Target Server Version : 100410
  File Encoding         : 65001
 
- Date: 17/05/2020 17:03:21
+ Date: 18/05/2020 15:38:36
 */
 
 SET NAMES utf8mb4;
@@ -94,33 +94,43 @@ CREATE TABLE `blog_comment`  (
 DROP TABLE IF EXISTS `blog_config`;
 CREATE TABLE `blog_config`  (
   `conf_id` int(11) NOT NULL AUTO_INCREMENT,
-  `conf_title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标题',
-  `conf_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '变量名',
-  `conf_content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '变量值',
-  `conf_order` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
-  `conf_tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '描述',
-  `field_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '字段类型',
-  `field_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '类型值',
-  `created_at` timestamp(0) NULL DEFAULT NULL COMMENT '添加时间',
-  `updated_at` timestamp(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `delete_at` timestamp(0) NULL DEFAULT NULL COMMENT '删除时间',
+  `conf_title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '标题',
+  `conf_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '变量名',
+  `conf_content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '变量值',
+  `conf_order` int(11) NULL DEFAULT 0 COMMENT '排序',
+  `conf_tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '描述',
+  `field_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '字段类型',
+  `field_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '类型值',
   PRIMARY KEY (`conf_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for blog_group
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_group`;
+CREATE TABLE `blog_group`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '权限组id',
+  `group_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限组名称',
+  `group_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组描述',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for blog_homeuser
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_homeuser`;
 CREATE TABLE `blog_homeuser`  (
-  `user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '前台用户表主键',
-  `user_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
-  `user_pass` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
-  `phone` int(11) NOT NULL DEFAULT 0 COMMENT '电话号码',
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '邮箱',
-  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '验证用户有效性的标示',
-  `active` tinyint(1) NOT NULL DEFAULT 0 COMMENT '否激活 1 激活 0 未激活',
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '//用户名',
+  `user_pass` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '//密码',
+  `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '邮箱',
+  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `active` tinyint(4) NULL DEFAULT 0 COMMENT '用户是否激活 0 未激活 1已激活',
+  `expire` int(11) NULL DEFAULT NULL COMMENT '最后允许激活的时间',
+  `identifier` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '第二身份标示',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '//前台用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for blog_links
@@ -128,15 +138,34 @@ CREATE TABLE `blog_homeuser`  (
 DROP TABLE IF EXISTS `blog_links`;
 CREATE TABLE `blog_links`  (
   `link_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `link_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `link_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
-  `link_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '链接',
-  `link_order` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
-  `created_at` timestamp(0) NULL DEFAULT NULL COMMENT '添加时间',
-  `updated_at` timestamp(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `delete_at` timestamp(0) NULL DEFAULT NULL COMMENT '	删除时间',
+  `link_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '//名称',
+  `link_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '//标题',
+  `link_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '//链接',
+  `link_order` int(11) NOT NULL DEFAULT 0 COMMENT '//排序',
   PRIMARY KEY (`link_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for blog_migrations
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_migrations`;
+CREATE TABLE `blog_migrations`  (
+  `migration` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for blog_navs
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_navs`;
+CREATE TABLE `blog_navs`  (
+  `nav_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nav_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '//名称',
+  `nav_alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '//别名',
+  `nav_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '//url',
+  `nav_order` int(11) NULL DEFAULT 0 COMMENT '//排序',
+  PRIMARY KEY (`nav_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for blog_permission
@@ -156,8 +185,16 @@ DROP TABLE IF EXISTS `blog_role`;
 CREATE TABLE `blog_role`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '角色表',
   `role_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of blog_role
+-- ----------------------------
+INSERT INTO `blog_role` VALUES (1, '超级管理员', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for blog_role_permission
@@ -183,7 +220,7 @@ CREATE TABLE `blog_user`  (
   `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '验证账号有效性',
   `expire` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账号激活是否过期时间',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_user
