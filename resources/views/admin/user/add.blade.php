@@ -38,9 +38,18 @@
                   <span class="x-red">*</span>用户名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                  <input type="text" id="L_username" name="user_name" required="" lay-verify="user_name"
                   autocomplete="off" class="layui-input">
               </div>
+          </div>
+          <div class="layui-form-item">
+                <label for="L_phone" class="layui-form-label">
+                    <span class="x-red">*</span>手机号
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
+                           autocomplete="off" class="layui-input">
+                </div>
           </div>
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">

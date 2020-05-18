@@ -86,7 +86,7 @@
                     <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
                         <i class="layui-icon">&#xe601;</i>
                     </a>
-                    <a title="编辑" onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                    <a title="编辑" onclick="x_admin_show('编辑','{{ url('admin/user/'.$v->user_id.'/edit') }}',600,400)" href="javascript:;">
                         <i class="layui-icon">&#xe642;</i>
                     </a>
                     <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
