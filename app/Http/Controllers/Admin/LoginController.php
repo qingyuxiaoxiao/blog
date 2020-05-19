@@ -90,6 +90,11 @@ class LoginController extends Controller
         // 跳转到登录页面
         return redirect('admin/login');
     }
+    //没有权限，对应的跳转
+    public function noaccess()
+    {
+        return view('errors.noaccess');
+    }
 
     public function jiami()
     {
@@ -97,7 +102,5 @@ class LoginController extends Controller
 //        $crypt_str = 'eyJpdiI6IjJwQ3BOekg1eFpBQ1VHd2RXcno1aUE9PSIsInZhbHVlIjoiT2hwTEJRVmlubVY2dlBVYWp2aWlrQT09IiwibWFjIjoiYTc0MzVhNmQ0ZTFiMzE2NDBiNWI5NTliODE4ZDc1ZWFiNTE4N2FkMTdkN2QxZTJjOGE5MTFlNWVmMzFmMzM1OCJ9';
         $crypt_str = Crypt::encrypt($str);
         return $crypt_str;
-
-
     }
 }

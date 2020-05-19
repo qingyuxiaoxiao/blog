@@ -99,7 +99,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+
+        return view('admin.role.edit',compact('role'));
     }
 
     /**
@@ -111,7 +113,26 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+//        使用模型修改表记录的两种方法,方法一
+        $role = Role::find($id);
+        $role->role_name = $input['role_name'];
+        $res = $role->save();
+
+        if($res){
+//            return 1111;
+            $data = [
+                'status'=>0,
+                'msg'=>'修改成功'
+            ];
+        }else{
+//            return 2222;
+            $data = [
+                'status'=>1,
+                'msg'=>'修改失败'
+            ];
+        }
+        return $data;
     }
 
     /**
@@ -120,8 +141,24 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         //
+        $input = $request->input('id');
+        $res = Role::destroy($input);
+        if($res){
+//            return 1111;
+            $data = [
+                'status'=>0,
+                'msg'=>'删除成功'
+            ];
+        }else{
+//            return 2222;
+            $data = [
+                'status'=>1,
+                'msg'=>'删除失败'
+            ];
+        }
+        return $data;
     }
 }

@@ -22,7 +22,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //加密算法
     Route::get('jiami','LoginController@jiami');
 });
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['isLogin']],function(){
+Route::get('noaccess','Admin\LoginController@noaccess');
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','isLogin']],function(){
     //后台首页路由
     Route::get('index','LoginController@index');
     //后台欢迎页
