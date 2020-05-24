@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 100410
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100410
  File Encoding         : 65001
 
- Date: 18/05/2020 22:58:53
+ Date: 24/05/2020 14:41:01
 */
 
 SET NAMES utf8mb4;
@@ -176,7 +176,7 @@ CREATE TABLE `blog_permission`  (
   `per_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限的名称',
   `per_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限对应的路由',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_permission
@@ -186,6 +186,11 @@ INSERT INTO `blog_permission` VALUES (2, '用户添加权限', 'App\\Http\\Contr
 INSERT INTO `blog_permission` VALUES (3, '用户修改权限', 'App\\Http\\Controllers\\Admin\\UserController@edit');
 INSERT INTO `blog_permission` VALUES (4, '后台欢迎页面', 'App\\Http\\Controllers\\Admin\\LoginController@welcome');
 INSERT INTO `blog_permission` VALUES (5, '文章添加权限', 'App\\Http\\Controllers\\Admin\\ArticleController@create');
+INSERT INTO `blog_permission` VALUES (6, '会员列表权限', 'App\\Http\\Controllers\\Admin\\UserController@index');
+INSERT INTO `blog_permission` VALUES (7, '会员添加权限', 'App\\Http\\Controllers\\Admin\\UserController@create');
+INSERT INTO `blog_permission` VALUES (8, '角色列表权限', 'App\\Http\\Controllers\\Admin\\RoleController@index');
+INSERT INTO `blog_permission` VALUES (9, '角色添加权限', 'App\\Http\\Controllers\\Admin\\RoleController@create');
+INSERT INTO `blog_permission` VALUES (10, '权限列表权限', 'App\\Http\\Controllers\\PermissionController@index');
 
 -- ----------------------------
 -- Table structure for blog_role
@@ -217,21 +222,23 @@ CREATE TABLE `blog_role_permission`  (
 -- ----------------------------
 -- Records of blog_role_permission
 -- ----------------------------
-INSERT INTO `blog_role_permission` VALUES (2, 5);
-INSERT INTO `blog_role_permission` VALUES (2, 4);
+INSERT INTO `blog_role_permission` VALUES (1, 9);
+INSERT INTO `blog_role_permission` VALUES (1, 7);
 INSERT INTO `blog_role_permission` VALUES (1, 5);
 INSERT INTO `blog_role_permission` VALUES (1, 4);
-INSERT INTO `blog_role_permission` VALUES (2, 3);
+INSERT INTO `blog_role_permission` VALUES (1, 6);
 INSERT INTO `blog_role_permission` VALUES (1, 3);
-INSERT INTO `blog_role_permission` VALUES (2, 2);
+INSERT INTO `blog_role_permission` VALUES (1, 8);
+INSERT INTO `blog_role_permission` VALUES (1, 2);
+INSERT INTO `blog_role_permission` VALUES (1, 10);
+INSERT INTO `blog_role_permission` VALUES (1, 1);
+INSERT INTO `blog_role_permission` VALUES (1, 6);
+INSERT INTO `blog_role_permission` VALUES (1, 6);
+INSERT INTO `blog_role_permission` VALUES (1, 5);
 INSERT INTO `blog_role_permission` VALUES (1, 2);
 INSERT INTO `blog_role_permission` VALUES (1, 1);
-INSERT INTO `blog_role_permission` VALUES (2, 1);
 INSERT INTO `blog_role_permission` VALUES (1, 6);
-INSERT INTO `blog_role_permission` VALUES (8, 6);
-INSERT INTO `blog_role_permission` VALUES (8, 5);
-INSERT INTO `blog_role_permission` VALUES (8, 2);
-INSERT INTO `blog_role_permission` VALUES (8, 1);
+INSERT INTO `blog_role_permission` VALUES (1, 7);
 
 -- ----------------------------
 -- Table structure for blog_user
@@ -267,7 +274,7 @@ CREATE TABLE `blog_user_role`  (
 -- ----------------------------
 -- Records of blog_user_role
 -- ----------------------------
-INSERT INTO `blog_user_role` VALUES (26, 1);
-INSERT INTO `blog_user_role` VALUES (26, 2);
+INSERT INTO `blog_user_role` VALUES (1, 1);
+INSERT INTO `blog_user_role` VALUES (1, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;
