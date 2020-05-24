@@ -14,7 +14,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Permission::get();
+        return view('admin.permission.list',compact('data'));
     }
 
     /**
@@ -25,6 +26,7 @@ class PermissionController extends Controller
     public function create()
     {
         //
+        return view('admin.permission.add');
     }
 
     /**
@@ -35,7 +37,14 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->except('_token');
+        $res = Permission::create($input);
+
+        if($res){
+            return redirect('admin/permission');
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -57,7 +66,9 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $per = Permission::find($id);
+
+        return view('admin.permission.edit',compact('per'));
     }
 
     /**
@@ -69,7 +80,24 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $per = Permission::find($id);
+        $per->per_name = $input['per_name'];
+        $per->per_url = $input['per_url'];
+        $res = $per->save();
+
+        if($res){
+            $data = [
+                'status'=>0,
+                'msg'=>'修改成功'
+            ];
+        }else{
+            $data = [
+                'status'=>1,
+                'msg'=>'修改失败'
+            ];
+        }
+        return $data;
     }
 
     /**
@@ -78,8 +106,22 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $input = $request->input('id');
+
+        $res = Permission::destroy($input);
+        if($res){
+            $data = [
+                'status'=>0,
+                'msg'=>'删除成功'
+            ];
+        }else{
+            $data = [
+                'status'=>1,
+                'msg'=>'删除失败'
+            ];
+        }
+        return $data;
     }
 }

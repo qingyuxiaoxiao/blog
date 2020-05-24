@@ -39,4 +39,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','i
     Route::get('role/auth/{id}','RoleController@auth');
     Route::post('role/doauth','RoleController@doAuth');
     Route::resource('role','RoleController');
+    // 权限模块路由
+    // 权限模块路由
+    Route::resource('permission','PermissionController');
 });
